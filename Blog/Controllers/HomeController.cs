@@ -1,4 +1,5 @@
-﻿using Blog.Models;
+﻿using Blog.Data;
+using Blog.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,8 +9,15 @@ using System.Threading.Tasks;
 
 namespace Blog.Controllers
 {
+    
     public class HomeController : Controller
     {
+        AppDbContext _ctx;
+        public HomeController(AppDbContext ctx)
+        {
+            _ctx = ctx;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -27,8 +35,11 @@ namespace Blog.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Post post)
+        public async Task<IActionResult> Edit(Post post)
         {
+            _ctx.Posts.Add(post);
+            await _ctx.SaveChangesAsync();
+
             return RedirectToAction("Index");
         }
     }
