@@ -36,6 +36,12 @@ namespace Blog.Data.Repository
             _ctx.Posts.Remove(GetPost(id));
         }
 
+
+        public void UpdatePost(Post post)
+        {
+            _ctx.Posts.Update(post);
+        }
+
         public async Task<bool> SaveChangesAsync()
         {
             if(await _ctx.SaveChangesAsync() > 0)
@@ -46,9 +52,6 @@ namespace Blog.Data.Repository
             
         }
 
-        public void UpdatePost(Post post)
-        {
-            _ctx.Posts.Update(post);
-        }
+        
     }
 }
