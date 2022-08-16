@@ -48,7 +48,7 @@ namespace Blog
                     };
                     var result = userMgr.CreateAsync(adminUser, "password").GetAwaiter().GetResult();
                     //add role to user
-                    userMgr.AddToRoleAsync(adminUser, adminRole.Name);
+                    userMgr.AddToRoleAsync(adminUser, adminRole.Name).GetAwaiter().GetResult();
                 }
             }
             catch(Exception e)
